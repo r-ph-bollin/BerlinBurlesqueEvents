@@ -26,14 +26,6 @@ const userSchema = new Schema({
     type: Number,
     required: false,
     unique: true,
-    /*  },
-    phone2: {
-      type: number,
-      required: true */
-  },
-  snapchat: {
-    type: String,
-    required: false,
   },
   address: {
     type: String,
