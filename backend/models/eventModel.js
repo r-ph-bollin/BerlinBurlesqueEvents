@@ -8,16 +8,28 @@ const eventSchema = new Schema(
       type: String,
       required: true,
     },
-    reps: {
-      type: Number,
+    description: {
+      type: String,
       required: true,
     },
-    load: {
-      type: Number,
+    start_date: {
+      type: Date,
+      required: true,
+    },
+    end_date: {
+      type: Date,
       required: true,
     },
     user_id: {
       type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    latlng: {
+      type: [Number, Number],
       required: true,
     },
   },

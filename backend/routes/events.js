@@ -10,14 +10,14 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all event routes
-router.use(requireAuth);
-
 // GET all events
 router.get("/", getEvents);
 
 //GET a single event
 router.get("/:id", getEvent);
+
+// require auth for all event routes
+router.use(requireAuth);
 
 // POST a new event
 router.post("/", createEvent);

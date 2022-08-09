@@ -16,21 +16,15 @@ const userSchema = new Schema({
   },
   instagram: {
     type: String,
-    required: false,
   },
   facebook: {
     type: String,
-    required: false,
   },
   phone1: {
     type: Number,
-    required: false,
-    unique: true,
   },
   address: {
     type: String,
-    required: false,
-    unique: false,
   },
 });
 
@@ -43,9 +37,9 @@ userSchema.statics.signup = async function (email, password) {
   if (!validator.isEmail(email)) {
     throw Error("Email not valid");
   }
-  if (!validator.isStrongPassword(password)) {
+  /* if (!validator.isStrongPassword(password)) {
     throw Error("Password not strong enough");
-  }
+  } */
 
   const exists = await this.findOne({ email });
 

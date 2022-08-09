@@ -4,12 +4,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const eventRoutes = require("./routes/events");
 const userRoutes = require("./routes/user");
-
+const cors = require("cors");
 // express app
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 // routes
+app.get("/", (req, res) => res.send("HIIIIIIi"));
 app.use("/api/events", eventRoutes);
 app.use("/api/user", userRoutes);
 

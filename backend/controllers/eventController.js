@@ -3,9 +3,17 @@ const mongoose = require("mongoose");
 
 // get all events
 const getEvents = async (req, res) => {
-  const user_id = req.user._id;
+  const events = await Event.find().sort({ createdAt: -1 });
+  console.log({ events });
 
+  res.status(200).json(events);
+};
+
+const getMyEvents = async (req, res) => {
+  const user_id = req.user._id;
+  console.log({ user_id });
   const events = await Event.find({ user_id }).sort({ createdAt: -1 });
+  console.log({ events });
 
   res.status(200).json(events);
 };
@@ -29,18 +37,24 @@ const getEvent = async (req, res) => {
 
 // create new event
 const createEvent = async (req, res) => {
-  const { title, load, reps } = req.body;
+  const { title, start_date, end_date, address, description } = req.body;
 
   let emptyFields = [];
 
   if (!title) {
     emptyFields.push("title");
   }
-  if (!load) {
-    emptyFields.push("load");
+  if (!start_date) {
+    emptyFields.push("start_date");
   }
-  if (!reps) {
-    emptyFields.push("reps");
+  if (!end_date) {
+    emptyFields.push("end_date");
+  }
+  if (!address) {
+    emptyFields.push("address");
+  }
+  if (!description) {
+    emptyFields.push("description");
   }
   if (emptyFields.length > 0) {
     return res
@@ -51,7 +65,14 @@ const createEvent = async (req, res) => {
   // add doc to db
   try {
     const user_id = req.user._id;
-    const event = await Event.create({ title, load, reps, user_id });
+    const event = await Event.create({
+      title,
+      start_date,
+      end_date,
+      address,
+      description,
+      user_id,
+    });
     res.status(200).json(event);
   } catch (error) {
     res.status(400).json({ error: error.message });
